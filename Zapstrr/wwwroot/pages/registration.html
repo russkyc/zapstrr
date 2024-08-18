@@ -1,24 +1,24 @@
 ﻿<div x-data="{
     username: '',
     password: '',
-    async login(){
+    async register(){
     
-        var result = await this.$post('/api/login', { username: this.username, password: this.password });
+        var result = await this.$post('/api/register', { username: this.username, password: this.password });
         
         if (result.status !== 200){
             this.username = '';
             this.password = '';
-            UIkit.notification({message: 'Invalid credentials', status: 'danger'});
+            UIkit.notification({message: 'Unable to register', status: 'danger'});
             return;
         }
         
         window.sessionStorage.setItem('token',result.data);
-        UIkit.notification({message: 'Successfully logged in!'});
+        UIkit.notification({message: 'Successfully registered!'});
         
         this.username = '';
         this.password = '';
         
-        this.$router.navigate('/');
+        this.$router.navigate('/login');
     }
 }" class="flex w-screen h-screen">
     <div class="m-auto uk-card uk-card-body uk-card-default">
@@ -26,16 +26,16 @@
             <div class="flex flex-1 items-center justify-center">
                 <div class="w-[350px] space-y-6">
                     <div class="flex flex-col space-y-2 text-center">
-                        <h1 class="text-2xl font-semibold tracking-tight">Login</h1>
-                        <p class="text-sm text-muted-foreground">Enter account details to get started.</p>
+                        <h1 class="text-2xl font-semibold tracking-tight">Register</h1>
+                        <p class="text-sm text-muted-foreground">Enter details to create a new account.</p>
                     </div>
-                    <form class="flex flex-col space-y-3" @submit.prevent="login()">
+                    <form class="flex flex-col space-y-3" @submit.prevent="register()">
                         <input x-model="username" class="uk-input" placeholder="Username" type="text"/>
                         <input x-model="password" class="uk-input" placeholder="Password" type="password"/>
                         <button type="submit" class="uk-button uk-button-primary w-full">
-                            Login
+                            Register
                         </button>
-                        <a href="/register" class="w-full mx-auto uk-button uk-button-ghost">Create Account</a>
+                        <a href="/" class="w-full mx-auto uk-button uk-button-ghost">Log In</a>
                     </form>
                 </div>
             </div>

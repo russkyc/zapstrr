@@ -2,7 +2,7 @@
     async authorize(context) {
         let token = window.sessionStorage.getItem('token');
         if (!token) {
-            if (context.route !== '/login') {
+            if (context.route !== '/login' && context.route !== '/register') {
                 return context.redirect('/login');
             }
         } else {
