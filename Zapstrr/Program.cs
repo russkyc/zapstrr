@@ -30,7 +30,15 @@ public class Program
             {
                 return Results.BadRequest();
             }
-            
+
+            var existing = db.GetCollection<Account>()
+                .Count(entry => entry.Username.Equals(account.Username));
+
+            if (existing > 0)
+            {
+                return Results.BadRequest();
+            }
+
             var entry = db.GetCollection<Account>().Insert(account);
             account.Id = entry.AsInt32;
             return Results.Ok(account);
