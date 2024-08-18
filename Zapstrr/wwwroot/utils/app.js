@@ -1,7 +1,22 @@
 ﻿const appRouter = {
+    authenticated: false,
+    username: '',
     nightMode: true,
+    init(){
+        let token = window.sessionStorage.getItem('token');
+        if (token !== null){
+            let user = parseJwt(token);
+            this.username = user.username;
+            this.authenticated = true;
+        }
+    },
     toggleNightMode(){
         this.nightMode = !this.nightMode;
+    },
+    logout(){
+        window.sessionStorage.removeItem('token');
+        this.authenticated = false;
+        this.$router.navigate('/login');
     },
     async authorize(context) {
         let token = window.sessionStorage.getItem('token');

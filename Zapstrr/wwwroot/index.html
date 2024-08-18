@@ -37,6 +37,9 @@
         </ul>
     </div>
     <div class="uk-navbar-right">
+        <button x-tash="username" x-show="authenticated" @click="logout()" class="py-0 h-8 uk-button uk-button-ghost">
+            logout {username}
+        </button>
         <button @click="toggleNightMode()" class="uk-button uk-button-default w-9 p-0">
             <svg x-show="!nightMode" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                  fill="none"

@@ -1,23 +1,7 @@
 ﻿
-<div x-data="
-{
-    username: '',
-    init(){
-        let token = window.sessionStorage.getItem('token');
-        if (token !== null){
-            let user = parseJwt(token);
-            this.username = user.username;
-        }
-    },
-    logout(){
-        window.sessionStorage.removeItem('token');
-        this.$router.navigate('/login');
-    }
-}" class="flex flex-col h-full">
-    <div class="flex space-y-3 flex-col m-auto text-3xl font-medium">
+<div class="flex flex-col">
+    <div class="flex space-y-3 flex-col text-3xl font-medium">
         <span x-tash="username" class="mx-auto text-md">Welcome back {username}!</span>
-        <button @click="logout()" class="uk-button uk-button-primary w-full">
-            Logout
-        </button>
+        
     </div>
 </div>
