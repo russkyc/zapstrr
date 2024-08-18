@@ -28,7 +28,7 @@
             try {
                 let claims = parseJwt(token);
                 if (context.route === '/login' || context.route === '/register') {
-                    return context.redirect('/');
+                    return context.redirect('/quizzes');
                 }
             } catch (e) {
                 if (context.route !== '/login') {
