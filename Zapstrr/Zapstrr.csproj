@@ -7,8 +7,14 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="jose-jwt" Version="5.0.0" />
+        <PackageReference Include="JWT" Version="10.1.1" />
         <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.7"/>
         <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0"/>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="wwwroot\components\" />
     </ItemGroup>
 
 </Project>
