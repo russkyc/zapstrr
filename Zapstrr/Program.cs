@@ -23,6 +23,8 @@ public class Program
         app.MapFallbackToFile("index.html");
 
         var db = new LiteDatabase("data.db");
+        
+        // Accounts
 
         app.MapPost("/api/register", ([FromBody] Account account) =>
         {
@@ -76,6 +78,8 @@ public class Program
             return Results.Ok(token);
         });
 
+        // Quizzes
+        
         app.MapGet("/api/quizzes", () =>
         {
             var quizzes = new List<Quiz>();
@@ -89,6 +93,15 @@ public class Program
             }
 
             return Results.Ok(quizzes);
+        });
+        
+        app.MapPost("/api/quizzes", ([FromBody] Quiz quiz) =>
+        {
+            var entry = db.GetCollection<Quiz>()
+                .Insert(quiz);
+            
+            quiz.Id = entry.AsInt32;
+            return Results.Ok(quiz);
         });
 
         app.UseCors(
