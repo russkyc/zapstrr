@@ -11,9 +11,9 @@
     },
     logout(){
         window.sessionStorage.removeItem('token');
-        this.$router.navigate('/login');
+        this.$app.navigate('/login');
     }
-}" class="flex flex-col w-screen h-screen">
+}" class="flex flex-col h-full">
     <div class="flex space-y-3 flex-col m-auto text-3xl font-medium">
         <span x-tash="username" class="mx-auto text-md">Welcome back {username}!</span>
         <button @click="logout()" class="uk-button uk-button-primary w-full">

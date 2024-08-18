@@ -1,8 +1,10 @@
-<h2 align="center">TAMStack Routing and Authorization Test</h2>
+<h2 align="center">Zapstrr</h2>
 
 <p style="text-align: justify">
-This is a sample project using Alpine.js with client side routing and protection using PineCone router and server side JWT auth using MinimalAPI.
-</p>
+Zapstrr is an open source multiplayer quiz game. Play online or locally using self-hosted servers, play with students, friends, colleagues, or anyone. Rise up to the top of the leaderboard and be the fastest Zapper!</p>
+
+### Tech Stack
+Zapstrr is made using Tailwind, AlpineJS, and MinimalAPI. For an easier term, you could use TAMStack. A robust C# backend with a lightweight interactive AlpineJS frontend.
 
 ### Prerequisites
 .NET 8 SDK

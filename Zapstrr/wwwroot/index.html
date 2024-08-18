@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Zapstrr</title>
-    <!--Utils-->
+    <!--Scripts-->
+    <script src="utils/app.js"></script>
     <script src="utils/jwt-parser.js"></script>
-    <script src="utils/router.js"></script>
     <!--Framework-->
     <script defer src="https://unpkg.com/alpinejs-tash@latest/dist/tash.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/persist@3.x.x/dist/cdn.min.js"></script>
@@ -16,16 +16,51 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit-icons.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/franken-wc@0.0.6/dist/css/gray.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/franken-wc@0.0.6/dist/css/orange.min.css"/>
 </head>
-<body class="dark bg-[hsl(var(--background))] text-[hsl(var(--foreground))]">
-<div x-data="router">
-    <!--Routes-->
-    <template x-route="/" x-handler="authorize" x-template.preload.target.app="pages/home.html"></template>
-    <template x-route="/login" x-handler="authorize" x-template.preload.target.app="pages/login.html"></template>
-    <template x-route="notfound" x-template.preload.target.app="pages/notfound.html"></template>
-    <!--App-->
-    <div id="app"></div>
-</div>
+<body x-data="app" :class="{ 'dark': nightMode }"
+      class="dark flex flex-col h-screen bg-[hsl(var(--background))] text-[hsl(var(--foreground))]">
+<!--Routes-->
+<template x-route="/" x-handler="authorize" x-template.preload.target.app="pages/home.html"></template>
+<template x-route="/login" x-handler="authorize" x-template.preload.target.app="pages/login.html"></template>
+<template x-route="/register" x-handler="authorize" plate.preload.target.app="pages/registration.html"></template>
+<template x-route="/play" x-template.preload.target.app="pages/play.html"></template>
+<template x-route="notfound" x-template.preload.target.app="pages/notfound.html"></template>
+<!--App-->
+<nav class="uk-navbar-container px-6" uk-navbar>
+    <div class="uk-navbar-left">
+        <a href="/" class="font-bold text-lg my-auto"><span class="text-[hsl(var(--primary))]">Zap</span>strr</a>
+        <ul class="uk-navbar-nav">
+            <li class="uk-active"><a href="/">Home</a></li>
+            <li><a href="/play">Play</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+    </div>
+    <div class="uk-navbar-right">
+        <button @click="toggleNightMode()" class="uk-button uk-button-default w-9 p-0">
+            <svg x-show="!nightMode" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="w-4 h-4 lucide lucide-sun">
+                <circle cx="12" cy="12" r="4"/>
+                <path d="M12 2v2"/>
+                <path d="M12 20v2"/>
+                <path d="m4.93 4.93 1.41 1.41"/>
+                <path d="m17.66 17.66 1.41 1.41"/>
+                <path d="M2 12h2"/>
+                <path d="M20 12h2"/>
+                <path d="m6.34 17.66-1.41 1.41"/>
+                <path d="m19.07 4.93-1.41 1.41"/>
+            </svg>
+            <svg x-show="nightMode" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                 fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 class="w-4 h-4 lucide lucide-moon">
+                <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/>
+            </svg>
+        </button>
+    </div>
+</nav>
+<div id="app" class="flex-grow"></div>
 </body>
 </html>
