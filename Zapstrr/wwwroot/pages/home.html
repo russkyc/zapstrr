@@ -11,7 +11,7 @@
     },
     logout(){
         window.sessionStorage.removeItem('token');
-        this.$app.navigate('/login');
+        this.$router.navigate('/login');
     }
 }" class="flex flex-col h-full">
     <div class="flex space-y-3 flex-col m-auto text-3xl font-medium">

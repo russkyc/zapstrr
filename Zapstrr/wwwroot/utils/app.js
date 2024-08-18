@@ -1,4 +1,4 @@
-﻿const app = {
+﻿const appRouter = {
     nightMode: true,
     toggleNightMode(){
         this.nightMode = !this.nightMode;
@@ -12,7 +12,7 @@
         } else {
             try {
                 let claims = parseJwt(token);
-                if (context.route === '/login') {
+                if (context.route === '/login' || context.route === '/register') {
                     return context.redirect('/');
                 }
             } catch (e) {
