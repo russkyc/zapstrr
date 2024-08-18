@@ -1,4 +1,8 @@
-﻿const router = {
+﻿const app = {
+    nightMode: true,
+    toggleNightMode(){
+        this.nightMode = !this.nightMode;
+    },
     async authorize(context) {
         let token = window.sessionStorage.getItem('token');
         if (!token) {

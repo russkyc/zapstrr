@@ -18,21 +18,21 @@
         this.username = '';
         this.password = '';
         
-        this.$router.navigate('/');
+        this.$app.navigate('/');
     }
-}" class="flex w-screen h-screen">
+}" class="flex h-full">
     <div class="m-auto uk-card uk-card-body uk-card-default">
         <div class="uk-margin col-span-2 flex flex-col p-8 lg:col-span-1">
             <div class="flex flex-1 items-center justify-center">
                 <div class="w-[350px] space-y-6">
                     <div class="flex flex-col space-y-2 text-center">
-                        <h1 class="text-2xl font-semibold tracking-tight">Login</h1>
-                        <p class="text-sm text-muted-foreground">Enter account details to get started.</p>
+                        <h1 class="text-2xl font-semibold tracking-tight">Login to <span class="font-bold text-3xl my-auto"><span class="text-[hsl(var(--primary))]">Zap</span>strr</span></h1>
+                        <p class="text-sm text-muted-foreground">Manage and play your quizzes.</p>
                     </div>
                     <form class="flex flex-col space-y-3" @submit.prevent="login()">
                         <input x-model="username" class="uk-input" placeholder="Username" type="text"/>
                         <input x-model="password" class="uk-input" placeholder="Password" type="password"/>
-                        <button type="submit" class="text-white uk-button uk-button-primary w-full">
+                        <button type="submit" class="text-white font-medium uk-button uk-button-primary w-full">
                             Login
                         </button>
                         <a href="/register" class="w-full mx-auto uk-button uk-button-ghost">Create Account</a>

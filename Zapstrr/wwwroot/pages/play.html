@@ -1,0 +1,26 @@
+﻿
+<div x-data="
+{
+    quizCode: '',
+    join(){
+        this.quizCode = '';
+    }
+}" class="flex flex-col h-full">
+    <div class="m-auto uk-card uk-card-body uk-card-default">
+        <div class="uk-margin col-span-2 flex flex-col p-8 lg:col-span-1">
+            <div class="flex flex-1 items-center justify-center">
+                <div class="space-y-6">
+                    <div class="flex flex-col space-y-2 text-center">
+                        <h1 class="text-2xl font-semibold tracking-tight">Join a game lobby</h1>
+                    </div>
+                    <form class="flex flex-col space-y-6" @submit.prevent="join()">
+                        <input x-model="quizCode" class="uk-input text-center font-bold text-xl" placeholder="Gamecode" type="text"/>
+                        <button type="submit" class="text-white font-medium uk-button uk-button-primary w-full">
+                            Join
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
