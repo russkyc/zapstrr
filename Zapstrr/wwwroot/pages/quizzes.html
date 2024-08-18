@@ -1,0 +1,48 @@
+﻿<div x-data="{
+    quizzes: [],
+    init(){
+        this.$get('/api/quizzes')
+        .then(result => {
+            if (result.status == 200){
+                this.quizzes = result.data;
+            }
+        });
+    }
+}" class="flex flex-col">
+  <div class="flex px-6 py-6 space-y-6 flex-col">
+    <div class="flex flex-row space-x-3">
+      <span x-tash="username" class="text-2xl font-bold">Quizzes</span>
+      <span class="flex-grow"></span>
+      <div class="uk-inline flex my-auto">
+        <span class="uk-form-icon w-4 my-auto ml-3" uk-icon="icon: search"></span>
+        <input class="uk-input" type="text" placeholder="Search" aria-label="Not clickable icon"/>
+      </div>
+      <button class="uk-button uk-button-primary">Create</button>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <template x-for="quiz in quizzes">
+        <div class="uk-card uk-card-default">
+          <div class="p-4 flex flex-row uk-card-header">
+            <h3 x-tash="quiz.name" class="my-auto text-lg font-bold">{quiz.name}</h3>
+            <span class="flex-grow"></span>
+            <button class="uk-button uk-button-default w-9 p-0">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                   fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                   stroke-linejoin="round" class="w-4 h-4 lucide lucide-pencil">
+                <path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/>
+                <path d="m15 5 4 4"/>
+              </svg>
+            </button>
+          </div>
+          <div class="p-4 uk-card-body">
+            <p x-tash="quiz.description">{quiz.description}</p>
+          </div>
+          <div class="flex flex-col space-y-3 p-4 uk-card-footer">
+            <button class="flex-grow uk-button uk-button-primary">Play</button>
+            <button class="flex-grow uk-button uk-button-default">Practice</button>
+          </div>
+        </div>
+      </template>
+    </div>
+  </div>
+</div>

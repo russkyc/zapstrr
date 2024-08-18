@@ -16,22 +16,25 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/uikit@3.21.6/dist/js/uikit-icons.min.js"></script>
-    <link rel="stylesheet" href="https://unpkg.com/franken-wc@0.0.6/dist/css/orange.min.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/franken-wc@0.0.6/dist/css/violet.min.css"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body x-data="appRouter" :class="{ 'dark': nightMode }"
       class="dark flex flex-col h-screen bg-[hsl(var(--background))] text-[hsl(var(--foreground))]">
 <!--Routes-->
-<template x-route="/" x-handler="authorize" x-template.preload.target.app="pages/home.html"></template>
+<template x-route="/" x-template.preload.target.app="pages/home.html"></template>
+<template x-route="/quizzes" x-handler="authorize" x-template.preload.target.app="pages/quizzes.html"></template>
 <template x-route="/login" x-handler="authorize" x-template.preload.target.app="pages/login.html"></template>
 <template x-route="/register" x-handler="authorize" x-template.preload.target.app="pages/registration.html"></template>
 <template x-route="/play" x-template.preload.target.app="pages/play.html"></template>
 <template x-route="notfound" x-template.preload.target.app="pages/notfound.html"></template>
 <!--App-->
-<nav class="uk-navbar-container px-6" uk-navbar>
+<nav class="top-0 sticky z-50 uk-navbar-container px-6" uk-navbar>
     <div class="uk-navbar-left">
         <a href="/" class="font-bold text-lg my-auto"><span class="text-[hsl(var(--primary))]">Zap</span>strr</a>
         <ul class="uk-navbar-nav">
             <li class="uk-active"><a href="/">Home</a></li>
+            <li><a href="/quizzes">Quizzes</a></li>
             <li><a href="/play">Play</a></li>
             <li><a href="#">About</a></li>
         </ul>

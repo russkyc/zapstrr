@@ -76,6 +76,21 @@ public class Program
             return Results.Ok(token);
         });
 
+        app.MapGet("/api/quizzes", () =>
+        {
+            var quizzes = new List<Quiz>();
+            for (int i = 1; i < 11; i++)
+            {
+                quizzes.Add(new Quiz()
+                {
+                    Name = $"Quiz {i}",
+                    Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc sagittis sapien elit, suscipit tempor leo pulvinar nec. Curabitur gravida, magna dapibus maximus facilisis, velit nibh suscipit odio, pretium sagittis sem velit non enim."
+                });
+            }
+
+            return Results.Ok(quizzes);
+        });
+
         app.UseCors(
             config => config.AllowAnyMethod()
                 .AllowCredentials()
