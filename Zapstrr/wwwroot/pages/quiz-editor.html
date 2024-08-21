@@ -1,37 +1,99 @@
-﻿<div x-data="{
-    quizzes: [],
-    init(){
-        this.$get('/api/quizzes')
-        .then(result => {
-            if (result.status == 200){
-                this.quizzes = result.data;
-            }
-        });
+﻿<div x-data="
+{
+    quiz: {
+        name: '',
+        questions: []
+    },
+    addQuestion(){
+        this.quiz.questions.push({});
+    },
+    async saveQuiz(){
+        let result = await $post('api/quizzes', this.quiz);
+        console.log(result);
+        this.quiz = {
+            name: '',
+            questions: []
+        };
+        this.$router.navigate('/quizzes');
     }
 }" class="flex flex-col">
     <div class="flex px-6 py-6 space-y-6 flex-col">
         <div class="flex flex-row space-x-3">
-            <span x-tash="username" class="text-2xl font-bold">New Quiz</span>
+            <input x-model="quiz.name" class="uk-input text-lg font-bold" type="text" placeholder="Title"
+                   aria-label="Not clickable icon"/>
             <span class="flex-grow"></span>
-            <div class="uk-inline flex my-auto">
-                <span class="uk-form-icon w-4 my-auto ml-3" uk-icon="icon: search"></span>
-                <input class="uk-input" type="text" placeholder="Search" aria-label="Not clickable icon"/>
-            </div>
-            <button class="uk-button uk-button-primary">Create</button>
+            <button @click="await saveQuiz()" class="uk-button uk-button-primary">Save</button>
         </div>
-        <div class="flex">
-            <div class="w-80 flex flex-col gap-4">
-                <template x-for="quiz in quizzes">
-                    <button class="uk-card uk-button-default">
-                        <div class="p-4 uk-card-body space-y-3">
-                            <div class="flex-grow h-24 rounded-md bg-cover"
-                                 data-src="https://cdn.pixabay.com/photo/2016/11/01/14/39/memphis-1788465_1280.png"
-                                 uk-img></div>
-                            <p class="text-justify" x-tash="quiz.description">{quiz.description}</p>
+        <div class="flex flex-col gap-4">
+            <template x-for="question in quiz.questions">
+                <div class="uk-card uk-card-default">
+                    <div class="flex h-full w-full p-4 uk-card-body gap-3">
+                        <div class="flex flex-col shrink-0 w-96 h-80 rounded-md bg-cover"
+                             data-src="https://cdn.pixabay.com/photo/2016/11/01/14/39/memphis-1788465_1280.png"
+                             uk-img>
+                            <div class="flex flex-col m-3 grow gap-3">
+                                <textarea x-model="question.content"
+                                          class="uk-textarea text-center align-middle text-wrap font-medium bg-[hsl(var(--background))]"
+                                          type="text" placeholder="Question"
+                                          aria-label="Not clickable icon"></textarea>
+                                <button class="grow uk-button uk-button-default p-0">Image</button>
+                            </div>
                         </div>
-                    </button>
-                </template>
-            </div>
+                        <div class="flex flex-col flex-grow gap-3">
+                            <p class="text-md font-semibold">Options</p>
+                            <div class="flex gap-3">
+                                <button class="shrink-0 uk-button w-9 p-0 bg-red-500">
+                                </button>
+                                <input x-model="question.option1" class="uk-input font-medium" type="text"
+                                       placeholder="Option 1"
+                                       aria-label="Not clickable icon"/>
+                                <div class="flex w-9 h-9">
+                                    <input class="shrink-0 m-auto uk-checkbox" type="checkbox"/>
+                                </div>
+                            </div>
+                            <div class="flex gap-3">
+                                <button class="shrink-0 uk-button w-9 p-0 bg-green-500">
+                                </button>
+                                <input x-model="question.option2" class="uk-input font-medium" type="text"
+                                       placeholder="Option 2"
+                                       aria-label="Not clickable icon"/>
+                                <div class="flex w-9 h-9">
+                                    <input class="shrink-0 m-auto uk-checkbox" type="checkbox"/>
+                                </div>
+                            </div>
+                            <div class="flex gap-3">
+                                <button class="shrink-0 uk-button w-9 p-0 bg-blue-500">
+                                </button>
+                                <input x-model="question.option3" class="uk-input font-medium" type="text"
+                                       placeholder="Option 3"
+                                       aria-label="Not clickable icon"/>
+                                <div class="flex w-9 h-9">
+                                    <input class="shrink-0 m-auto uk-checkbox" type="checkbox"/>
+                                </div>
+                            </div>
+                            <div class="flex gap-3">
+                                <button class="shrink-0 uk-button w-9 p-0 bg-yellow-500">
+                                </button>
+                                <input x-model="question.option4" class="uk-input font-medium" type="text"
+                                       placeholder="Option 4"
+                                       aria-label="Not clickable icon"/>
+                                <div class="flex w-9 h-9">
+                                    <input class="shrink-0 m-auto uk-checkbox" type="checkbox"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+            <button @click="addQuestion()" class="flex flex-row gap-2 uk-button uk-button-primary">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
+                     stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                     class="lucide lucide-plus w-4 h-4 my-auto">
+                    <path d="M5 12h14"/>
+                    <path d="M12 5v14"/>
+                </svg>
+                Add Question
+            </button>
         </div>
     </div>
 </div>
