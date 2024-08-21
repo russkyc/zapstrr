@@ -1,0 +1,30 @@
+﻿<div x-data="
+{
+    code: '',
+    quiz: {},
+    init(){
+        let id = this.$router.params.id;
+        this.$get(`/api/play/${id}`)
+            .then(result => {
+                if (result.status === 200){
+                    this.code = result.data.code;
+                    this.quiz = result.data.quiz;
+                }
+            });
+        
+    }
+}" class="flex h-full">
+    <div class="m-auto uk-card">
+        <div class="uk-card-body">
+            <div class="flex flex-col gap-3">
+                <h2 class="text-lg font-medium mx-auto">Quiz Code</h2>
+                <div class="m-auto uk-card rounded-md">
+                    <div class="uk-card-body p-3 text-5xl">
+                        <p x-tash="code" class="font-bold">{code}</p>
+                    </div>
+                </div>
+                <h2 class="text-md mx-auto">Join the game using this code</h2>
+            </div>
+        </div>
+    </div>
+</div>

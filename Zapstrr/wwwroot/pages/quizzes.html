@@ -7,6 +7,9 @@
                 this.quizzes = result.data;
             }
         });
+    },
+    play(quiz){
+        this.$router.navigate(`/host/${quiz.id}`);
     }
 }" class="flex flex-col">
   <div class="flex px-6 py-6 space-y-6 flex-col">
@@ -39,7 +42,7 @@
             <p class="text-justify" x-tash="quiz.description">{quiz.description}</p>
           </div>
           <div class="flex flex-col space-y-3 p-4 uk-card-footer">
-            <button class="flex-grow uk-button uk-button-primary">Play</button>
+            <button @click="play(quiz)" class="flex-grow uk-button uk-button-primary">Play</button>
             <button class="flex-grow uk-button uk-button-default">Practice</button>
           </div>
         </div>

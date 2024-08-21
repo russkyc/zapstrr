@@ -1,3 +1,4 @@
+using System.Security.Cryptography;
 using System.Text;
 using Jose;
 using LiteDB;
@@ -80,6 +81,19 @@ public class Program
 
         // Quizzes
         
+        app.MapGet("/api/quizzes/{id}", ([FromRoute] int id) =>
+        {
+            var quiz = db.GetCollection<Quiz>()
+                .FindById(id);
+
+            if (quiz is null)
+            {
+                return Results.NotFound(id);
+            }
+            
+            return Results.Ok(quiz);
+        });
+        
         app.MapGet("/api/quizzes", () =>
         {
             var quizzes = db.GetCollection<Quiz>()
@@ -97,6 +111,44 @@ public class Program
             quiz.Id = entry.AsInt32;
             return Results.Ok(quiz);
         });
+        
+        // Game
+        app.MapGet("/api/play/{id}", ([FromRoute] int id) =>
+        {
+            var quiz = db.GetCollection<Quiz>()
+                .FindById(id);
+
+            if (quiz is null)
+            {
+                return Results.NotFound(id);
+            }
+
+            var response = new
+            {
+                code = GenerateCode(),
+                quiz = quiz
+            };
+            
+            return Results.Ok(response);
+            
+            string GenerateCode()
+            {
+                const string digits = "0123456789";
+                var code = new StringBuilder(7);
+                using (var rng = new RNGCryptoServiceProvider())
+                {
+                    byte[] randomNumber = new byte[1];
+                    for (int i = 0; i < 7; i++)
+                    {
+                        rng.GetBytes(randomNumber);
+                        int index = randomNumber[0] % digits.Length;
+                        code.Append(digits[index]);
+                    }
+                }
+                return code.ToString();
+            }
+        });
+        
 
         app.UseCors(
             config => config.AllowAnyMethod()
